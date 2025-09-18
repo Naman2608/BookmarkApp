@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">My Books</string>
+    <string name="add_book">ADD BOOK</string>
+    <string name="my_books">My Books</string>
+    <string name="book_title">Book Title</string>
+    <string name="author">Author</string>
+    <string name="pages">Pages</string>
+    <string name="chapter">Chapter</string>
+    <string name="part">Part</string>
+    <string name="preface">Preface</string>
+    <string name="current_page">Current Page</string>
+    <string name="total_pages">Total Pages</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="mark_complete">Mark Complete</string>
+    <string name="add_pages">Add Pages</string>
+    <string name="no_books">No books yet</string>
+    <string name="add_your_first_book">Add your first book to start tracking</string>
+    <string name="of">of</string>
+</resources>
