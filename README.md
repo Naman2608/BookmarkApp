@@ -1,6 +1,14 @@
 # � The Bookmark - Ultimate Reading Companion
 
-**The Bookmark** is your ultimate reading companion app that transforms how you track, experience, and share your reading journey. More than just a simple book tracker, it's a comprehensive platform designed for passionate readers who want to dive deeper into their literary adventures.
+**The Bookmark** is your ultimate reading companion app that transforms how you track, experience, and share your reading journey. More than just a simple book## 👥 Authors
+
+**Naman Chhabra**
+- GitHub: [@Naman2608](https://github.com/Naman2608)
+- Project: [The Bookmark App](https://github.com/Naman2608/BookmarkApp)
+
+**Ashu Sharma**
+- Portfolio: [ashusharma.net](https://ashusharma.net/)
+- Website: [https://ashusharma.net/](https://ashusharma.net/) it's a comprehensive platform designed for passionate readers who want to dive deeper into their literary adventures.
 
 ![Platform](https://img.shields.io/badge/Platform-Android-green.svg)
 ![Language](https://img.shields.io/badge/Language-Kotlin-blue.svg)
@@ -206,11 +214,15 @@ We welcome contributions! Here's how to get involved:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👤 Author
+## � Authors
 
-**Naman Patel**
+**Naman Chhabra**
 - GitHub: [@Naman2608](https://github.com/Naman2608)
 - Project: [The Bookmark App](https://github.com/Naman2608/BookmarkApp)
+
+**Ashu Sharma**
+- Portfolio: [ashusharma.net](https://ashusharma.net/)
+- Website: [https://ashusharma.net/](https://ashusharma.net/)
 
 ## 🙏 Acknowledgments
 
