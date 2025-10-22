@@ -1,4 +1,4 @@
-﻿package com.bookmark.app
+package com.bookmark.app
 
 import android.os.Bundle
 import android.view.View
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+
         initViews()
         setupRecyclerView()
         setupAddBookButton()
@@ -35,9 +35,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         bookAdapter = BookAdapter(
+            books = allBooks,
             onBookClick = { book ->
-                Toast.makeText(this, "Opening: \${book.title}", Toast.LENGTH_SHORT).show()
-                // TODO: Navigate to BookDetailPageActivity
+                Toast.makeText(this, "Opening: ${book.title}", Toast.LENGTH_SHORT).show()
+            },
+            onAddPagesClick = { book ->
+                // Handle add pages functionality
+                addPagesToBook(book)
             }
         )
         
@@ -54,13 +58,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addPagesToBook(book: Book) {
+        // For demo purposes, add 10 pages
         val updatedBook = book.copy(currentPage = book.currentPage + 10)
         val index = allBooks.indexOf(book)
         if (index != -1) {
             allBooks[index] = updatedBook
             bookAdapter.notifyItemChanged(index)
         }
-        Toast.makeText(this, "Added 10 pages to \${book.title}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Added 10 pages to ${book.title}", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateEmptyState() {
@@ -81,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 90,
                 totalPages = 225,
                 currentChapter = "",
-                progressColor = "#E91E63"
+                progressColor = "#E91E63" // Purple
             ),
             Book(
                 id = 2,
@@ -89,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 90,
                 totalPages = 225,
                 currentChapter = "Part - 2",
-                progressColor = "#000000"
+                progressColor = "#000000" // Black
             ),
             Book(
                 id = 3,
@@ -97,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 50,
                 totalPages = 300,
                 currentChapter = "Chapter 2",
-                progressColor = "#4CAF50"
+                progressColor = "#4CAF50" // Green
             ),
             Book(
                 id = 4,
@@ -105,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 0,
                 totalPages = 200,
                 currentChapter = "Preface",
-                progressColor = "#E0E0E0"
+                progressColor = "#E0E0E0" // Gray (not started)
             ),
             Book(
                 id = 5,
@@ -113,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 100,
                 totalPages = 350,
                 currentChapter = "Chapter 3",
-                progressColor = "#4CAF50"
+                progressColor = "#4CAF50" // Green
             ),
             Book(
                 id = 6,
@@ -121,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 60,
                 totalPages = 500,
                 currentChapter = "Chapter 2",
-                progressColor = "#FF9800"
+                progressColor = "#FF9800" // Orange
             ),
             Book(
                 id = 7,
@@ -129,7 +134,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 70,
                 totalPages = 1050,
                 currentChapter = "Chapter 3",
-                progressColor = "#F44336"
+                progressColor = "#F44336" // Red
             ),
             Book(
                 id = 8,
@@ -137,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                 currentPage = 70,
                 totalPages = 1050,
                 currentChapter = "Chapter 3",
-                progressColor = "#2196F3",
+                progressColor = "#2196F3", // Blue
                 isCompleted = true
             )
         ))

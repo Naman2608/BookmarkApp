@@ -127,7 +127,11 @@ We believe reading is not just about consuming content—it's about building con
    ```
 2. Open the project in Android Studio
 3. Sync the project with Gradle files
-4. Run the app on an emulator or physical device
+4. Build the APK:
+   ```bash
+   ./gradlew.bat clean assembleDebug
+   ```
+5. Run the app on an emulator or physical device
 
 ## 🛠️ Built With
 

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Book Detail Page - Matching design image 3 (Mahagatha screen) -->
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Red Header Section -->
+        <LinearLayout
+            android:id="@+id/headerSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/book_header_red"
+            android:padding="24dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Book Cover -->
+            <ImageView
+                android:id="@+id/ivBookCover"
+                android:layout_width="120dp"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="Book cover" />
+
+            <!-- Book Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/tvBookTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mahagatha"
+                    android:textSize="28sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium" />
+
+                <!-- Subtitle -->
+                <TextView
+                    android:id="@+id/tvSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="100 Tales from\nthe Puranas"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:alpha="0.9" />
+
+                <!-- Author -->
+                <TextView
+                    android:id="@+id/tvAuthor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Satyarth Nayak"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:alpha="0.85" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Page Progress Section -->
+        <LinearLayout
+            android:id="@+id/pageProgressSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:gravity="center_vertical"
+            android:background="@color/background_darker"
+            app:layout_constraintTop_toBottomOf="@id/headerSection">
+
+            <!-- Page Count Badge -->
+            <TextView
+                android:id="@+id/tvPageCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30/300 Pages"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/page_count_badge"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Add Pages Button -->
+            <ImageButton
+                android:id="@+id/btnAddPages"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@android:drawable/ic_input_add"
+                android:background="@drawable/circular_button_bg"
+                android:tint="@color/white"
+                android:contentDescription="Add pages" />
+        </LinearLayout>
+
+        <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:max="100"
+            android:progress="10"
+            android:progressDrawable="@drawable/progress_bar_dark"
+            app:layout_constraintTop_toBottomOf="@id/pageProgressSection" />
+
+        <!-- Reading Section -->
+        <LinearLayout
+            android:id="@+id/readingSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@color/background_dark"
+            app:layout_constraintTop_toBottomOf="@id/progressBar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reading"
+                android:textSize="24sp"
+                android:textColor="@color/text_primary_dark"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Circular Streak Indicators -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <!-- Daily Streak -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    
+                    <com.bookmark.app.CircularStreakView
+                        android:id="@+id/dailyStreakView"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Five days of\ncontinuous reading"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary_dark"
+                        android:gravity="center"
+                        android:maxLines="2" />
+                </LinearLayout>
+
+                <!-- Weekly Streak -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone">
+                    
+                    <com.bookmark.app.CircularStreakView
+                        android:id="@+id/weeklyStreakView"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Weekly"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary_dark" />
+                </LinearLayout>
+
+                <!-- Monthly Streak -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone">
+                    
+                    <com.bookmark.app.CircularStreakView
+                        android:id="@+id/monthlyStreakView"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Monthly"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary_dark" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Writing Section -->
+        <LinearLayout
+            android:id="@+id/writingSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@color/background_dark"
+            app:layout_constraintTop_toBottomOf="@id/readingSection">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Writing"
+                android:textSize="24sp"
+                android:textColor="@color/text_primary_dark"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Writing Streak -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.bookmark.app.CircularStreakView
+                    android:id="@+id/writingStreakView"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="First Day of continuous\nwriting about my reading"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary_dark" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Reading History -->
+        <LinearLayout
+            android:id="@+id/historySection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="@color/background_dark"
+            app:layout_constraintTop_toBottomOf="@id/writingSection">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yesterday"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary_dark"
+                android:paddingVertical="12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/surface_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6 October"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary_dark"
+                android:paddingVertical="12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/surface_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 October"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary_dark"
+                android:paddingVertical="12dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

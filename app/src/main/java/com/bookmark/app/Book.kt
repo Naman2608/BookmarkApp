@@ -1,15 +1,25 @@
 package com.bookmark.app
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "books")
 data class Book(
-    val id: Long,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
     val title: String,
     val author: String = "",
-    val currentPage: Int,
-    val totalPages: Int,
+    val subtitle: String = "",
+    val isbn: String = "",
+    val coverUrl: String = "",
+    val currentPage: Int = 0,
+    val totalPages: Int = 0,
     val currentChapter: String = "",
-    val progressColor: String = "#E91E63", // Default purple
+    val progressColor: String = "#E74C3C", // Default red from design
     val isCompleted: Boolean = false,
-    val dateAdded: Long = System.currentTimeMillis()
+    val dateAdded: Long = System.currentTimeMillis(),
+    val lastReadDate: Long = System.currentTimeMillis(),
+    val userId: String = ""
 ) {
     fun getProgressPercentage(): Int {
         return if (totalPages > 0) {
@@ -18,7 +28,7 @@ data class Book(
     }
     
     fun getProgressText(): String {
-        return "$currentPage of $totalPages"
+        return "$currentPage/$totalPages Pages"
     }
     
     fun getChapterText(): String {
@@ -34,7 +44,10 @@ data class Book(
             "#FF9800" -> android.R.color.holo_orange_light
             "#2196F3" -> android.R.color.holo_blue_light
             "#F44336" -> android.R.color.holo_red_dark
-            else -> android.R.color.holo_red_light
+            "#E74C3C" -> R.color.streak_red
+            "#000000" -> android.R.color.black
+            "#E0E0E0" -> android.R.color.darker_gray
+            else -> R.color.streak_red
         }
     }
 }

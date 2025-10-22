@@ -1,0 +1,132 @@
+package com.bookmark.app
+
+import android.os.Bundle
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+
+class BookDetailActivity : AppCompatActivity() {
+
+    private lateinit var bookCoverImage: ImageView
+    private lateinit var bookTitle: TextView
+    private lateinit var bookSubtitle: TextView
+    private lateinit var bookAuthor: TextView
+    private lateinit var pageCountDisplay: TextView
+    private lateinit var bookProgressBar: ProgressBar
+    private lateinit var addPagesButton: ImageView
+    
+    private lateinit var dailyReadingStreak: CircularStreakView
+    private lateinit var weeklyReadingStreak: CircularStreakView
+    private lateinit var monthlyReadingStreak: CircularStreakView
+    private lateinit var dailyWritingStreak: CircularStreakView
+    
+    private lateinit var dailyStreakLabel: TextView
+    private lateinit var writingStreakLabel: TextView
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_book_detail)
+
+        initViews()
+        loadBookData()
+        setupClickListeners()
+    }
+
+    private fun initViews() {
+        bookCoverImage = findViewById(R.id.bookCoverImage)
+        bookTitle = findViewById(R.id.bookTitle)
+        bookSubtitle = findViewById(R.id.bookSubtitle)
+        bookAuthor = findViewById(R.id.bookAuthor)
+        pageCountDisplay = findViewById(R.id.pageCountDisplay)
+        bookProgressBar = findViewById(R.id.bookProgressBar)
+        addPagesButton = findViewById(R.id.addPagesButton)
+        
+        dailyReadingStreak = findViewById(R.id.dailyReadingStreak)
+        weeklyReadingStreak = findViewById(R.id.weeklyReadingStreak)
+        monthlyReadingStreak = findViewById(R.id.monthlyReadingStreak)
+        dailyWritingStreak = findViewById(R.id.dailyWritingStreak)
+        
+        dailyStreakLabel = findViewById(R.id.dailyStreakLabel)
+        writingStreakLabel = findViewById(R.id.writingStreakLabel)
+    }
+
+    private fun loadBookData() {
+        // In real app, load book data using the BOOK_ID from intent
+        // For now, use sample data matching Figma design
+        
+        val sampleBook = Book(
+            id = 1,
+            title = "Mahagatha",
+            subtitle = "100 Tales from the Puranas",
+            author = "Satyarth Nayak",
+            currentPage = 30,
+            totalPages = 300,
+            progressColor = "#E74C3C", // Red
+            readingStreak = ReadingStreak(
+                dailyStreak = 5,
+                weeklyStreak = 3,
+                monthlyStreak = 0,
+                dailyProgress = 1.0f,
+                weeklyProgress = 1.0f,
+                color = "#E74C3C"
+            ),
+            writingStreak = WritingStreak(
+                dailyStreak = 1,
+                weeklyStreak = 0,
+                monthlyStreak = 0,
+                dailyProgress = 0.2f,
+                color = "#E74C3C"
+            ),
+            lastReadDate = "Yesterday",
+            readingHistory = listOf("6 October", "5 October")
+        )
+        
+        // Set book info
+        bookTitle.text = sampleBook.title
+        bookSubtitle.text = sampleBook.subtitle
+        bookAuthor.text = sampleBook.author
+        pageCountDisplay.text = sampleBook.getPageCountText()
+        
+        // Set progress bar
+        bookProgressBar.progress = sampleBook.getProgressPercentage()
+        val progressColor = ContextCompat.getColor(this, R.color.streak_red)
+        bookProgressBar.progressTintList = android.content.res.ColorStateList.valueOf(progressColor)
+        
+        // Set reading streaks
+        dailyReadingStreak.setStreakData(
+            sampleBook.readingStreak.getDailyLabel(),
+            sampleBook.readingStreak.dailyProgress,
+            R.color.streak_red
+        )
+        dailyStreakLabel.text = sampleBook.readingStreak.getDailyDescription()
+        
+        weeklyReadingStreak.setStreakData(
+            sampleBook.readingStreak.getWeeklyLabel(),
+            sampleBook.readingStreak.weeklyProgress,
+            R.color.streak_red
+        )
+        
+        monthlyReadingStreak.setStreakData(
+            "M0",
+            0f,
+            R.color.streak_gray
+        )
+        
+        // Set writing streak
+        dailyWritingStreak.setStreakData(
+            sampleBook.writingStreak.getDailyLabel(),
+            sampleBook.writingStreak.dailyProgress,
+            R.color.streak_red
+        )
+        writingStreakLabel.text = sampleBook.writingStreak.getDailyDescription()
+    }
+
+    private fun setupClickListeners() {
+        addPagesButton.setOnClickListener {
+            Toast.makeText(this, "Add pages feature coming soon!", Toast.LENGTH_SHORT).show()
+        }
+    }
+}

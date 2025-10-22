@@ -8,8 +8,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyBooks"
         tools:targetApi="31">
+        
+        <!-- Authentication Flow - Entry Point -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.MyBooks">
             <intent-filter>
@@ -17,6 +19,151 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".LoginActivity" />
+        
+        <!-- Main Dashboard -->
+        <activity
+            android:name=".NowReadingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:launchMode="singleTop" />
+        
+        <!-- Add Book Flow -->
+        <activity
+            android:name=".AddBookmarkActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".NowReadingActivity" />
+        
+        <activity
+            android:name=".ConnectBookActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".AddBookmarkActivity" />
+        
+        <activity
+            android:name=".QRScannerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".AddBookmarkActivity" />
+        
+        <activity
+            android:name=".ManualAddBookActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".AddBookmarkActivity" />
+        
+        <!-- Book Management -->
+        <activity
+            android:name=".StatusMenuActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks" />
+        
+        <activity
+            android:name=".BooklistActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".NowReadingActivity" />
+        
+        <activity
+            android:name=".BookDetailPageActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".BooklistActivity" />
+        
+        <!-- Writing/Journaling Flow -->
+        <activity
+            android:name=".NowWritingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".NowReadingActivity" />
+        
+        <activity
+            android:name=".NotesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".NowWritingActivity" />
+        
+        <activity
+            android:name=".CreateNotebookActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".NowWritingActivity" />
+        
+        <!-- More Options Menu -->
+        <activity
+            android:name=".MoreOptionsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".NowReadingActivity" />
+        
+        <!-- Account Management -->
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".MoreOptionsActivity" />
+        
+        <activity
+            android:name=".AccountInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".AccountActivity" />
+        
+        <activity
+            android:name=".SecurityActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".AccountActivity" />
+        
+        <!-- My Lists -->
+        <activity
+            android:name=".MyListsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".MoreOptionsActivity" />
+        
+        <activity
+            android:name=".ToReadListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".MyListsActivity" />
+        
+        <activity
+            android:name=".CustomListsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".MyListsActivity" />
+        
+        <activity
+            android:name=".ImportListsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".MyListsActivity" />
+        
+        <!-- About -->
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".MoreOptionsActivity" />
+        
+        <!-- Legacy Activities (kept for backward compatibility) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks" />
+        
+        <activity
+            android:name=".BookDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyBooks"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

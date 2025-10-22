@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/card_dark"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Book Cover Image -->
+        <ImageView
+            android:id="@+id/bookCover"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:background="@color/surface_light"
+            android:contentDescription="Book cover" />
+
+        <!-- Book Info Container -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <!-- Book Title -->
+            <TextView
+                android:id="@+id/bookTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mahagatha"
+                style="@style/BookTitleStyle"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Author Name -->
+            <TextView
+                android:id="@+id/bookAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Satyarth Nayak"
+                style="@style/BookAuthorStyle"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Progress Bar Container -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:progressTint="@color/streak_red"
+                    android:progressBackgroundTint="@color/progress_background_dark"
+                    android:progress="40"
+                    android:max="100" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- Circular Streak Indicator -->
+        <com.bookmark.app.CircularStreakView
+            android:id="@+id/circularStreak"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

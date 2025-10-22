@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Notebook Item for Writing tab -->
+<androidx.cardview.widget.CardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/card_dark"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Book Cover -->
+        <ImageView
+            android:id="@+id/ivBookCover"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Book cover" />
+
+        <!-- Notebook Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <!-- Book Title -->
+            <TextView
+                android:id="@+id/tvBookTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mahagatha"
+                android:textSize="18sp"
+                android:textColor="@color/text_primary_dark"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <!-- Note Count -->
+            <TextView
+                android:id="@+id/tvNoteCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="3 notes"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary_dark" />
+
+            <!-- Last Modified -->
+            <TextView
+                android:id="@+id/tvLastModified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Last modified: 2 hours ago"
+                android:textSize="12sp"
+                android:textColor="@color/text_gray"
+                android:alpha="0.7" />
+        </LinearLayout>
+
+        <!-- Writing Streak Indicator -->
+        <com.bookmark.app.CircularStreakView
+            android:id="@+id/writingStreakView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="12dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

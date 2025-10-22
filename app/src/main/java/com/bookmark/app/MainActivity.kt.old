@@ -1,0 +1,381 @@
+package com.bookmark.apppackage com.bookmark.app
+
+
+
+import android.content.Intentimport android.os.Bundle
+
+import android.os.Bundleimport android.view.View
+
+import android.widget.ImageViewimport android.widget.Button
+
+import android.widget.LinearLayoutimport android.widget.Toast
+
+import android.widget.TextViewimport androidx.appcompat.app.AppCompatActivity
+
+import android.widget.Toastimport androidx.recyclerview.widget.LinearLayoutManager
+
+import androidx.appcompat.app.AppCompatActivityimport androidx.recyclerview.widget.RecyclerView
+
+import androidx.recyclerview.widget.LinearLayoutManager
+
+import androidx.recyclerview.widget.RecyclerViewclass MainActivity : AppCompatActivity() {
+
+
+
+class MainActivity : AppCompatActivity() {    private lateinit var booksRecyclerView: RecyclerView
+
+    private lateinit var btnAddBook: Button
+
+    private lateinit var booksRecyclerView: RecyclerView    private lateinit var emptyStateLayout: View
+
+    private lateinit var headerTitle: TextView    
+
+    private lateinit var addButton: ImageView    private lateinit var bookAdapter: BookAdapter
+
+    private lateinit var moreButton: ImageView    private var allBooks = mutableListOf<Book>()
+
+    private lateinit var readingTab: LinearLayout
+
+    private lateinit var menuTab: LinearLayout    override fun onCreate(savedInstanceState: Bundle?) {
+
+    private lateinit var readingIcon: ImageView        super.onCreate(savedInstanceState)
+
+    private lateinit var menuIcon: ImageView        setContentView(R.layout.activity_main)
+
+    
+
+    private lateinit var bookAdapter: BookAdapterDark        initViews()
+
+    private var allBooks = mutableListOf<Book>()        setupRecyclerView()
+
+    private var isReadingTabActive = true        setupAddBookButton()
+
+        loadSampleData()
+
+    override fun onCreate(savedInstanceState: Bundle?) {    }
+
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_reading)    private fun initViews() {
+
+        booksRecyclerView = findViewById(R.id.booksRecyclerView)
+
+        initViews()        btnAddBook = findViewById(R.id.btnAddBook)
+
+        setupRecyclerView()        emptyStateLayout = findViewById(R.id.emptyStateLayout)
+
+        setupClickListeners()    }
+
+        loadSampleData()
+
+    }    private fun setupRecyclerView() {
+
+        bookAdapter = BookAdapter(
+
+    private fun initViews() {            books = allBooks,
+
+        booksRecyclerView = findViewById(R.id.booksRecyclerView)            onBookClick = { book ->
+
+        headerTitle = findViewById(R.id.headerTitle)                Toast.makeText(this, "Opening: ${book.title}", Toast.LENGTH_SHORT).show()
+
+        addButton = findViewById(R.id.addButton)            },
+
+        moreButton = findViewById(R.id.moreButton)            onAddPagesClick = { book ->
+
+        readingTab = findViewById(R.id.readingTab)                // Handle add pages functionality
+
+        menuTab = findViewById(R.id.menuTab)                addPagesToBook(book)
+
+        readingIcon = findViewById(R.id.readingIcon)            }
+
+        menuIcon = findViewById(R.id.menuIcon)        )
+
+    }        
+
+        booksRecyclerView.apply {
+
+    private fun setupRecyclerView() {            adapter = bookAdapter
+
+        bookAdapter = BookAdapterDark(            layoutManager = LinearLayoutManager(this@MainActivity)
+
+            books = allBooks,        }
+
+            onBookClick = { book ->    }
+
+                // Navigate to book detail page
+
+                val intent = Intent(this, BookDetailActivity::class.java)    private fun setupAddBookButton() {
+
+                intent.putExtra("BOOK_ID", book.id)        btnAddBook.setOnClickListener {
+
+                startActivity(intent)            Toast.makeText(this, "Add book feature coming soon!", Toast.LENGTH_SHORT).show()
+
+            }        }
+
+        )    }
+
+        
+
+        booksRecyclerView.apply {    private fun addPagesToBook(book: Book) {
+
+            adapter = bookAdapter        // For demo purposes, add 10 pages
+
+            layoutManager = LinearLayoutManager(this@MainActivity)        val updatedBook = book.copy(currentPage = book.currentPage + 10)
+
+        }        val index = allBooks.indexOf(book)
+
+    }        if (index != -1) {
+
+            allBooks[index] = updatedBook
+
+    private fun setupClickListeners() {            bookAdapter.notifyItemChanged(index)
+
+        addButton.setOnClickListener {        }
+
+            Toast.makeText(this, "Add book feature coming soon!", Toast.LENGTH_SHORT).show()        Toast.makeText(this, "Added 10 pages to ${book.title}", Toast.LENGTH_SHORT).show()
+
+        }    }
+
+        
+
+        moreButton.setOnClickListener {    private fun updateEmptyState() {
+
+            Toast.makeText(this, "More options coming soon!", Toast.LENGTH_SHORT).show()        if (allBooks.isEmpty()) {
+
+        }            booksRecyclerView.visibility = View.GONE
+
+                    emptyStateLayout.visibility = View.VISIBLE
+
+        readingTab.setOnClickListener {        } else {
+
+            if (!isReadingTabActive) {            booksRecyclerView.visibility = View.VISIBLE
+
+                switchToReadingTab()            emptyStateLayout.visibility = View.GONE
+
+            }        }
+
+        }    }
+
+        
+
+        menuTab.setOnClickListener {    private fun loadSampleData() {
+
+            if (isReadingTabActive) {        allBooks.addAll(listOf(
+
+                switchToWritingTab()            Book(
+
+            }                id = 1,
+
+        }                title = "Vyaktitva ka Vikas",
+
+    }                currentPage = 90,
+
+                totalPages = 225,
+
+    private fun switchToReadingTab() {                currentChapter = "",
+
+        isReadingTabActive = true                progressColor = "#E91E63" // Purple
+
+        headerTitle.text = "Reading"            ),
+
+        readingIcon.setColorFilter(getColor(R.color.white))            Book(
+
+        menuIcon.setColorFilter(getColor(R.color.text_secondary_dark))                id = 2,
+
+                        title = "Almanac of Naval Ravikant",
+
+        // Reload reading data                currentPage = 90,
+
+        loadSampleData()                totalPages = 225,
+
+    }                currentChapter = "Part - 2",
+
+                progressColor = "#000000" // Black
+
+    private fun switchToWritingTab() {            ),
+
+        isReadingTabActive = false            Book(
+
+        headerTitle.text = "Writing"                id = 3,
+
+        readingIcon.setColorFilter(getColor(R.color.text_secondary_dark))                title = "Creative Confidence",
+
+        menuIcon.setColorFilter(getColor(R.color.white))                currentPage = 50,
+
+                        totalPages = 300,
+
+        // Load writing data                currentChapter = "Chapter 2",
+
+        loadWritingData()                progressColor = "#4CAF50" // Green
+
+    }            ),
+
+            Book(
+
+    private fun loadSampleData() {                id = 4,
+
+        allBooks.clear()                title = "How to Talk",
+
+        allBooks.addAll(listOf(                currentPage = 0,
+
+            Book(                totalPages = 200,
+
+                id = 1,                currentChapter = "Preface",
+
+                title = "Mahagatha",                progressColor = "#E0E0E0" // Gray (not started)
+
+                subtitle = "100 Tales from the Puranas",            ),
+
+                author = "Satyarth Nayak",            Book(
+
+                currentPage = 30,                id = 5,
+
+                totalPages = 300,                title = "Creative Confidence",
+
+                progressColor = "#E74C3C", // Red                currentPage = 100,
+
+                readingStreak = ReadingStreak(                totalPages = 350,
+
+                    dailyStreak = 5,                currentChapter = "Chapter 3",
+
+                    weeklyStreak = 0,                progressColor = "#4CAF50" // Green
+
+                    monthlyStreak = 0,            ),
+
+                    dailyProgress = 1.0f,            Book(
+
+                    color = "#E74C3C"                id = 6,
+
+                ),                title = "The Design of Everyday things",
+
+                writingStreak = WritingStreak(                currentPage = 60,
+
+                    dailyStreak = 5,                totalPages = 500,
+
+                    weeklyStreak = 0,                currentChapter = "Chapter 2",
+
+                    monthlyStreak = 0,                progressColor = "#FF9800" // Orange
+
+                    dailyProgress = 1.0f,            ),
+
+                    color = "#E74C3C"            Book(
+
+                ),                id = 7,
+
+                lastReadDate = "Yesterday"                title = "Elon Musk",
+
+            ),                currentPage = 70,
+
+            Book(                totalPages = 1050,
+
+                id = 2,                currentChapter = "Chapter 3",
+
+                title = "The Almanack of Naval Ravi...",                progressColor = "#F44336" // Red
+
+                author = "Eric Jorgenson",            ),
+
+                currentPage = 90,            Book(
+
+                totalPages = 225,                id = 8,
+
+                progressColor = "#606060", // Gray                title = "Operating Systems",
+
+                readingStreak = ReadingStreak(                currentPage = 70,
+
+                    dailyStreak = 0,                totalPages = 1050,
+
+                    weeklyStreak = 3,                currentChapter = "Chapter 3",
+
+                    monthlyStreak = 0,                progressColor = "#2196F3", // Blue
+
+                    weeklyProgress = 1.0f,                isCompleted = true
+
+                    color = "#606060"            )
+
+                ),        ))
+
+                writingStreak = WritingStreak(
+
+                    dailyStreak = 0,        updateEmptyState()
+
+                    weeklyStreak = 3,        bookAdapter.notifyDataSetChanged()
+
+                    monthlyStreak = 0,    }
+
+                    weeklyProgress = 1.0f,}
+                    color = "#606060"
+                )
+            )
+        ))
+
+        bookAdapter.notifyDataSetChanged()
+    }
+
+    private fun loadWritingData() {
+        allBooks.clear()
+        allBooks.addAll(listOf(
+            Book(
+                id = 1,
+                title = "Mahagatha",
+                author = "Satyarth Nayak",
+                currentPage = 30,
+                totalPages = 300,
+                progressColor = "#E74C3C", // Red
+                writingStreak = WritingStreak(
+                    dailyStreak = 5,
+                    weeklyStreak = 0,
+                    monthlyStreak = 0,
+                    dailyProgress = 0.3f,
+                    color = "#E74C3C"
+                )
+            ),
+            Book(
+                id = 2,
+                title = "The Almanack of Naval Ravi...",
+                author = "Eric Jorgenson",
+                currentPage = 90,
+                totalPages = 225,
+                progressColor = "#606060", // Gray
+                writingStreak = WritingStreak(
+                    dailyStreak = 0,
+                    weeklyStreak = 3,
+                    monthlyStreak = 0,
+                    weeklyProgress = 0.5f,
+                    color = "#606060"
+                )
+            ),
+            Book(
+                id = 3,
+                title = "Elon Musk",
+                author = "Walter Isaacson",
+                currentPage = 150,
+                totalPages = 450,
+                progressColor = "#3498DB", // Blue
+                writingStreak = WritingStreak(
+                    dailyStreak = 0,
+                    weeklyStreak = 3,
+                    monthlyStreak = 0,
+                    weeklyProgress = 0.4f,
+                    color = "#3498DB"
+                )
+            ),
+            Book(
+                id = 4,
+                title = "Personal Notebook",
+                author = "Ashu Sharma",
+                currentPage = 50,
+                totalPages = 200,
+                progressColor = "#FF9800", // Orange
+                writingStreak = WritingStreak(
+                    dailyStreak = 0,
+                    weeklyStreak = 3,
+                    monthlyStreak = 0,
+                    weeklyProgress = 0.6f,
+                    color = "#FF9800"
+                )
+            )
+        ))
+
+        bookAdapter.notifyDataSetChanged()
+    }
+}

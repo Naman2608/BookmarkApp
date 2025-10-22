@@ -1,0 +1,81 @@
+package com.bookmark.app
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+
+class BookAdapterDark(
+    private val books: List<Book>,
+    private val onBookClick: (Book) -> Unit
+) : RecyclerView.Adapter<BookAdapterDark.BookViewHolder>() {
+
+    class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val bookCover: ImageView = itemView.findViewById(R.id.bookCover)
+        val bookTitle: TextView = itemView.findViewById(R.id.bookTitle)
+        val bookAuthor: TextView = itemView.findViewById(R.id.bookAuthor)
+        val progressBar: ProgressBar = itemView.findViewById(R.id.progressBar)
+        val circularStreak: CircularStreakView = itemView.findViewById(R.id.circularStreak)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_book_dark, parent, false)
+        return BookViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
+        val book = books[position]
+        
+        // Set book info
+        holder.bookTitle.text = book.title
+        holder.bookAuthor.text = book.author
+        
+        // Set progress bar
+        holder.progressBar.progress = book.getProgressPercentage()
+        
+        // Set progress bar color
+        val progressColor = when (book.progressColor) {
+            "#E74C3C" -> R.color.streak_red
+            "#FF9800" -> R.color.streak_orange
+            "#3498DB" -> R.color.streak_blue
+            "#606060" -> R.color.streak_gray
+            "#4CAF50" -> R.color.streak_green
+            else -> R.color.streak_red
+        }
+        
+        val colorValue = ContextCompat.getColor(holder.itemView.context, progressColor)
+        holder.progressBar.progressTintList = android.content.res.ColorStateList.valueOf(colorValue)
+        
+        // Set circular streak indicator
+        val readingStreak = book.readingStreak
+        val streakLabel = when {
+            readingStreak.weeklyStreak > 0 -> readingStreak.getWeeklyLabel()
+            readingStreak.dailyStreak > 0 -> readingStreak.getDailyLabel()
+            else -> "D0"
+        }
+        
+        val streakProgress = when {
+            readingStreak.weeklyStreak > 0 -> readingStreak.weeklyProgress
+            readingStreak.dailyStreak > 0 -> readingStreak.dailyProgress
+            else -> 0f
+        }
+        
+        holder.circularStreak.setStreakData(streakLabel, streakProgress, progressColor)
+        
+        // TODO: Load book cover image from URL or resource
+        // For now, use a placeholder or default background
+        holder.bookCover.setBackgroundColor(
+            ContextCompat.getColor(holder.itemView.context, R.color.surface_light)
+        )
+        
+        // Click listener
+        holder.itemView.setOnClickListener { onBookClick(book) }
+    }
+
+    override fun getItemCount() = books.size
+}
