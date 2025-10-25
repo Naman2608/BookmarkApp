@@ -10,7 +10,9 @@
     <color name="white">#FFFFFFFF</color>
     
     <!-- Dark Theme - Primary Colors (from designs) -->
-    <color name="background_dark">#FF1C1C1C</color>
+    <color name="background_dark">#282828</color>
+    <color name="book_dark">#1d1d1d</color>
+    <color name="background_secondary_dark">#2F2F2F</color>
     <color name="background_darker">#FF000000</color>
     <color name="surface_dark">#FF2C2C2C</color>
     <color name="surface_light">#FF3D3D3D</color>

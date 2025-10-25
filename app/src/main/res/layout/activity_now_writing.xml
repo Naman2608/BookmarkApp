@@ -19,13 +19,13 @@
 
         <TextView
             android:layout_width="0dp"
+            android:layout_height="42dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:fontFamily="@font/anek_devanagari_bold"
             android:text="Writing"
-            android:textSize="32sp"
             android:textColor="@color/text_primary_dark"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium" />
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <!-- Add Notebook Button -->
         <ImageButton
